@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
 header {
   width: 100%;
   height: 68px;
@@ -18,6 +20,8 @@ header {
     nav ul {
       display: flex;
       gap: 30px;
+      font-size: 12px;
+      letter-spacing: 1.32px;
     }
   }
   .buttons_container {
@@ -26,12 +30,21 @@ header {
     align-items: center;
     justify-content: end;
     gap: 11px;
-    button {
+    .btn {
       border-radius: 33px;
       padding: 6px 13px;
       cursor: pointer;
       border: 1px solid #050505;
       background-color: #fff;
+      font-family: "Bebas Neue", sans-serif;
+      transition: 0.3s ease-in;
+      &_lang {
+        font-family: "Inter", sans-serif;
+      }
+      &:hover {
+        background-color: black;
+        color: #fff;
+      }
     }
   }
 }
