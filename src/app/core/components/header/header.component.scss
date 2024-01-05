@@ -25,5 +25,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: end;
+    gap: 11px;
+    button {
+      border-radius: 33px;
+      padding: 6px 13px;
+      cursor: pointer;
+      border: 1px solid #050505;
+      background-color: #fff;
+    }
   }
 }
