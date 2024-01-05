@@ -7,17 +7,23 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 97px;
-  .logo {
-    cursor: pointer;
-  }
   .navigation_container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 50%;
+    .logo {
+      cursor: pointer;
+    }
     nav ul {
       display: flex;
       gap: 30px;
     }
+  }
+  .buttons_container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
   }
 }
