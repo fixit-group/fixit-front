@@ -12,8 +12,9 @@ export class HeaderComponent {
 
   public openDialog() {
     const dialogRef = this.dialog.open(SignupComponent, {
-      // width: '250px',
-      // data: {},
+      width: '700px',
+      height: '300px',
+      data: {},
     });
 
     dialogRef.afterClosed().subscribe((result) => {
