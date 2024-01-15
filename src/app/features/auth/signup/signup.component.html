@@ -1,2 +1,56 @@
-<p>signup works!</p>
-<h1>degekjah</h1>
+<!-- registration.component.html -->
+<div class="registration-container">
+  <div class="user-options">
+    <button class="button user" type="button">მომხმარებელი</button>
+    <button class="button mechanic" type="button">ხელოსანი</button>
+  </div>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <input
+        type="text"
+        placeholder="სახელი"
+        id="name"
+        formControlName="name"
+        placeholder="სახელი"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="text"
+        placeholder="ნომერი"
+        id="number"
+        formControlName="number"
+        placeholder="ნომერი"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="password"
+        placeholder="პაროლი"
+        id="password"
+        formControlName="password"
+        placeholder="პაროლი"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="password"
+        placeholder="გამეორება პაროლი"
+        id="repeatPassword"
+        formControlName="repeatPassword"
+        placeholder="გაიმეორეთ პაროლი"
+      />
+    </div>
+    <button
+      class="button form"
+      type="submit"
+      [disabled]="registrationForm.invalid"
+    >
+      რეგისტრაცია
+    </button>
+    <div class="bottom-options">
+      <hr />
+      <a href="#">დაგავიწყდა პაროლი?</a>
+    </div>
+  </form>
+</div>

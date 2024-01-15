@@ -1,1 +1,40 @@
-<p>signin works!</p>
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="user-options">
+      <button class="button registration" type="button">რეგისტრაცია</button>
+      <button class="button logout" type="button">გამოსვლა</button>
+    </div>
+    <div class="input-group">
+      <input
+        type="text"
+        placeholder="სახელი"
+        id="username"
+        formControlName="username"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="password"
+        placeholder="პაროლი"
+        id="password"
+        formControlName="password"
+      />
+    </div>
+    <label class="checkboxLabel">
+      <input
+        type="checkbox"
+        name="rememberMeCheckbox"
+        id="rememberMeCheckbox"
+        formControlName="rememberMeCheckbox"
+      />
+      დამახსოვრება
+    </label>
+    <button class="button form" type="submit" [disabled]="loginForm.invalid">
+      შესვლა
+    </button>
+    <div class="bottom-options">
+      <hr />
+      <a href="#">დაგავიწყდა პაროლი?</a>
+    </div>
+  </form>
+</div>

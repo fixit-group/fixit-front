@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { SigninComponent } from 'src/app/features/auth/signin/signin.component';
 import { SignupComponent } from 'src/app/features/auth/signup/signup.component';
 
 @Component({
@@ -8,17 +9,30 @@ import { SignupComponent } from 'src/app/features/auth/signup/signup.component';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  [x: string]: any;
   constructor(public dialog: MatDialog) {}
 
-  public openDialog() {
-    const dialogRef = this.dialog.open(SignupComponent, {
-      width: '700px',
-      height: '300px',
-      data: {},
-    });
+  public openDialog(userAction: string) {
+    let dialogRef;
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    if (userAction === 'login') {
+      dialogRef = this.dialog.open(SigninComponent, {
+        width: '510px',
+        height: '637px',
+        data: {},
+      });
+    } else if (userAction === 'signup') {
+      dialogRef = this.dialog.open(SignupComponent, {
+        width: '510px',
+        height: '637px',
+        data: {},
+      });
+    }
+
+    if (dialogRef) {
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed');
+      });
+    }
   }
 }
