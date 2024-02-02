@@ -26,6 +26,7 @@ export class HeaderComponent {
         width: '510px',
         height: '637px',
         data: {},
+        panelClass: ['custom-dialog', 'custom-dialog-surface'],
       });
     }
 
