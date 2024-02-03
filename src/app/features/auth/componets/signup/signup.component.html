@@ -1,13 +1,27 @@
 <div class="registration-container">
   <div class="user-options">
-    <button class="button user" type="button">მომხმარებელი</button>
-    <button class="button mechanic" type="button">ხელოსანი</button>
+    <button
+      class="button user"
+      type="button"
+      [ngClass]="{ active: activeRole === 'user' }"
+      (click)="onRoleChange('user')"
+    >
+      მომხმარებელი
+    </button>
+    <button
+      class="button mechanic"
+      type="button"
+      [ngClass]="{ active: activeRole === 'mechanic' }"
+      (click)="onRoleChange('mechanic')"
+    >
+      ხელოსანი
+    </button>
   </div>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="input-group" appearance="fill">
       <mat-label>სახელი</mat-label>
       <input matInput formControlName="name" />
-      <mat-error *ngIf="registrationForm.controls.name.invalid">
+      <mat-error *ngIf="registrationForm.controls['name'].invalid">
         Name is required
       </mat-error>
     </mat-form-field>
@@ -15,7 +29,7 @@
     <mat-form-field class="input-group" appearance="fill">
       <mat-label>ტელეფონის ნომერი</mat-label>
       <input matInput formControlName="number" />
-      <mat-error *ngIf="registrationForm.controls.number.invalid">
+      <mat-error *ngIf="registrationForm.controls['number'].invalid">
         Number is required
       </mat-error>
     </mat-form-field>
@@ -36,7 +50,7 @@
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error *ngIf="registrationForm.controls.password.invalid">
+      <mat-error *ngIf="registrationForm.controls['password'].invalid">
         Password is required
       </mat-error>
     </mat-form-field>
@@ -46,7 +60,7 @@
       <input
         matInput
         [type]="hideConfirm ? 'password' : 'text'"
-        formControlName="password"
+        formControlName="confirm"
       />
       <button
         mat-icon-button
@@ -57,8 +71,8 @@
       >
         <mat-icon>{{ hideConfirm ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error *ngIf="registrationForm.controls.password.invalid">
-        Password is required
+      <mat-error *ngIf="registrationForm.controls['confirm'].invalid">
+        Confirm Password is required
       </mat-error>
     </mat-form-field>
 

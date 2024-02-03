@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from '../../validators/password-validator';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,42 +9,58 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  hide = true;
-  hideConfirm = true;
-  constructor(private authService: AuthService) {}
+  public hide = true;
+  public hideConfirm = true;
 
-  registrationForm = new FormGroup(
-    {
-      name: new FormControl<string>('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(50),
-          Validators.pattern('^[a-zA-Z ]*$'),
+  activeRole: 'user' | 'mechanic' = 'user';
+
+  registrationForm!: FormGroup;
+
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder // Inject FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.initializeForm(); // Initialize form in ngOnInit
+  }
+
+  private initializeForm() {
+    this.registrationForm = this.fb.group(
+      {
+        name: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(50),
+            Validators.pattern('^[a-zA-Z ]*$'),
+          ],
         ],
-      }),
-      number: new FormControl<number | null>(null, {
-        validators: [Validators.required],
-      }),
-      password: new FormControl<string>('', {
-        validators: [Validators.required],
-      }),
-      confirm: new FormControl<string>('', {
-        validators: [Validators.required],
-      }),
-    },
-    {
-      validators: passwordValidator,
-    }
-  );
+        number: [null, Validators.required],
+        password: ['', Validators.required],
+        confirm: ['', Validators.required],
+      },
+      {
+        validators: passwordValidator,
+      }
+    );
+  }
 
-  ngOnInit() {}
+  onRoleChange(role: 'user' | 'mechanic') {
+    this.activeRole = role;
+    // if (role === 'user') {
+    //   this.initializeFormForUser();
+    // } else {
+    //   this.initializeFormForMechanic();
+    // }
+  }
 
   onSubmit() {
-    if (this.registrationForm!.valid) {
-      console.log('Registration form submitted:', this.registrationForm!.value);
+    if (this.registrationForm?.valid) {
+      console.log('Registration form submitted:', this.registrationForm?.value);
       this.authService
-        .registerEmployee(this.registrationForm!.value)
+        .registerEmployee(this.registrationForm?.value)
         .subscribe({
           next: (response) => console.log('Registration successful', response),
           error: (error) => console.error('Registration failed', error),
