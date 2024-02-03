@@ -19,20 +19,90 @@
   </div>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="input-group" appearance="fill">
-      <mat-label>სახელი</mat-label>
+      <mat-label>ნიკნეიმი</mat-label>
       <input matInput formControlName="name" />
-      <mat-error *ngIf="registrationForm.controls['name'].invalid">
+      <mat-error
+        *ngIf="
+          registrationForm.get('name') &&
+          registrationForm.controls['name'].invalid
+        "
+      >
         Name is required
       </mat-error>
     </mat-form-field>
 
+    <ng-container *ngIf="activeRole === 'mechanic'">
+      <mat-form-field class="input-group" appearance="fill">
+        <mat-label>სახელი</mat-label>
+        <input matInput formControlName="firstName" />
+        <mat-error
+          *ngIf="
+            registrationForm.get('firstName') &&
+            registrationForm.controls['firstName'].invalid
+          "
+        >
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="activeRole === 'mechanic'">
+      <mat-form-field class="input-group" appearance="fill">
+        <mat-label>გვარი</mat-label>
+        <input matInput formControlName="lastName" />
+        <mat-error
+          *ngIf="
+            registrationForm.get('lastName') &&
+            registrationForm.controls['lastName'].invalid
+          "
+        >
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+
     <mat-form-field class="input-group" appearance="fill">
       <mat-label>ტელეფონის ნომერი</mat-label>
       <input matInput formControlName="number" />
-      <mat-error *ngIf="registrationForm.controls['number'].invalid">
+      <mat-error
+        *ngIf="
+          registrationForm.get('number') &&
+          registrationForm.controls['number'].invalid
+        "
+      >
         Number is required
       </mat-error>
     </mat-form-field>
+
+    <ng-container *ngIf="activeRole === 'mechanic'">
+      <mat-form-field class="input-group" appearance="fill">
+        <mat-label>ქალაქი</mat-label>
+        <input matInput formControlName="city" />
+        <mat-error
+          *ngIf="
+            registrationForm.get('city') &&
+            registrationForm.controls['city'].invalid
+          "
+        >
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="activeRole === 'mechanic'">
+      <mat-form-field class="input-group" appearance="fill">
+        <mat-label>მისამართი</mat-label>
+        <input matInput formControlName="address" />
+        <mat-error
+          *ngIf="
+            registrationForm.get('address') &&
+            registrationForm.controls['address'].invalid
+          "
+        >
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
 
     <mat-form-field class="input-group" appearance="fill">
       <mat-label>პაროლი</mat-label>
@@ -50,7 +120,12 @@
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error *ngIf="registrationForm.controls['password'].invalid">
+      <mat-error
+        *ngIf="
+          registrationForm.get('password') &&
+          registrationForm.controls['password'].invalid
+        "
+      >
         Password is required
       </mat-error>
     </mat-form-field>
@@ -71,7 +146,12 @@
       >
         <mat-icon>{{ hideConfirm ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error *ngIf="registrationForm.controls['confirm'].invalid">
+      <mat-error
+        *ngIf="
+          registrationForm.get('confirm') &&
+          registrationForm.controls['confirm'].invalid
+        "
+      >
         Confirm Password is required
       </mat-error>
     </mat-form-field>

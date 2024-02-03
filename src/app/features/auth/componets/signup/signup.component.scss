@@ -1,7 +1,7 @@
 .registration-container {
   height: 100%;
   width: 100%;
-  background-color: #e6e6e6;
+  // background-color: #e6e6e6;
   padding: 45px;
 
   .user-options {
@@ -23,6 +23,7 @@
     font-size: 15px;
     border: 2px solid #2f76ff;
     color: #2f76ff;
+    background-color: #fff;
     &:hover {
       background-color: #0056b3;
       color: #fff;
@@ -32,7 +33,6 @@
   form {
     display: flex;
     flex-direction: column;
-    height: 82%;
     justify-content: space-evenly;
 
     .button {
@@ -107,6 +107,6 @@
   }
 }
 .button.active {
-  background-color: #2f76ff;
+  background-color: #2f76ff !important;
   color: #fff !important;
 }

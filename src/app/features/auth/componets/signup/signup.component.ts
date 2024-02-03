@@ -47,13 +47,27 @@ export class SignupComponent implements OnInit {
     );
   }
 
+  private initializeFormForUser() {
+    this.initializeForm();
+  }
+
+  private initializeFormForMechanic() {
+    this.registrationForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
+    });
+  }
+
   onRoleChange(role: 'user' | 'mechanic') {
+    console.log('Role changed to:', role); // Debug log
     this.activeRole = role;
-    // if (role === 'user') {
-    //   this.initializeFormForUser();
-    // } else {
-    //   this.initializeFormForMechanic();
-    // }
+    if (role === 'user') {
+      this.initializeFormForUser();
+    } else {
+      this.initializeFormForMechanic();
+    }
   }
 
   onSubmit() {
