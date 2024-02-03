@@ -1,24 +1,11 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
+// Define the palettes for your theme using the Material Design palettes
 $Fixit_Front-primary: mat.define-palette(mat.$indigo-palette);
 $Fixit_Front-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
 $Fixit_Front-warn: mat.define-palette(mat.$red-palette);
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
+// Create the theme object
 $Fixit_Front-theme: mat.define-light-theme(
   (
     color: (
@@ -29,9 +16,7 @@ $Fixit_Front-theme: mat.define-light-theme(
   )
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
+@include mat.core();
 @include mat.all-component-themes($Fixit_Front-theme);
 
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
@@ -59,4 +44,33 @@ body {
 
 .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 17px !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 10px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border: none;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  border-radius: 20px;
+  // height: 40px;
+  background-color: #d9d9d9 !important;
+}
+
+.mat-mdc-form-field-error {
+  font-size: 12px;
+  letter-spacing: 1px;
 }

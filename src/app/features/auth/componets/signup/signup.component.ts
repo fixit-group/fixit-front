@@ -9,6 +9,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  hide = true;
+  hideConfirm = true;
   constructor(private authService: AuthService) {}
 
   registrationForm = new FormGroup(

@@ -1,48 +1,69 @@
-<!-- registration.component.html -->
 <div class="registration-container">
   <div class="user-options">
     <button class="button user" type="button">მომხმარებელი</button>
     <button class="button mechanic" type="button">ხელოსანი</button>
   </div>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div class="input-group">
+    <mat-form-field class="input-group" appearance="fill">
+      <mat-label>სახელი</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="registrationForm.controls.name.invalid">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-group" appearance="fill">
+      <mat-label>ტელეფონის ნომერი</mat-label>
+      <input matInput formControlName="number" />
+      <mat-error *ngIf="registrationForm.controls.number.invalid">
+        Number is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-group" appearance="fill">
+      <mat-label>პაროლი</mat-label>
       <input
-        type="text"
-        placeholder="სახელი"
-        id="name"
-        formControlName="name"
-        placeholder="სახელი"
-      />
-    </div>
-    <div class="input-group">
-      <input
-        type="text"
-        placeholder="ნომერი"
-        id="number"
-        formControlName="number"
-        placeholder="ნომერი"
-      />
-    </div>
-    <div class="input-group">
-      <input
-        type="password"
-        placeholder="პაროლი"
-        id="password"
+        matInput
+        [type]="hide ? 'password' : 'text'"
         formControlName="password"
-        placeholder="პაროლი"
       />
-    </div>
-    <div class="input-group">
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="registrationForm.controls.password.invalid">
+        Password is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-group" appearance="fill">
+      <mat-label>გაიმეორეთ პაროლი</mat-label>
       <input
-        type="password"
-        placeholder="გამეორება პაროლი"
-        id="confirm"
-        formControlName="confirm"
-        placeholder="გაიმეორეთ პაროლი"
+        matInput
+        [type]="hideConfirm ? 'password' : 'text'"
+        formControlName="password"
       />
-    </div>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hideConfirm = !hideConfirm"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideConfirm"
+      >
+        <mat-icon>{{ hideConfirm ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="registrationForm.controls.password.invalid">
+        Password is required
+      </mat-error>
+    </mat-form-field>
+
     <button
-      class="button form"
+      mat-raised-button
       type="submit"
       [disabled]="registrationForm.invalid"
     >
