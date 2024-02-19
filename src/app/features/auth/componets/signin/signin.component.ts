@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,31 +8,39 @@ import {
   styleUrls: ['./signin.component.scss'],
 })
 export class SigninComponent implements OnInit {
-  loginForm = new FormGroup({
-    username: new FormControl<string>('', {
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-        Validators.pattern('^[a-zA-Z ]*$'),
+  private authService!: AuthService;
+  loginForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  private initializeForm() {
+    this.loginForm = this.fb.group({
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z ]*$'),
+        ],
       ],
-    }),
-    password: new FormControl<string>('', {
-      validators: [Validators.required],
-    }),
-    rememberMeCheckbox: new FormControl<boolean>(false, {
-      validators: [Validators.required],
-    }),
-  });
-
-  constructor() {}
-
-  ngOnInit(): void {}
+      password: ['', Validators.required],
+      rememberMeCheckbox: [false, Validators.required],
+    });
+  }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const formData = this.loginForm.value;
-      console.log('Submitted Data:', formData);
+      console.log('Login form submitted:', this.loginForm?.value);
+      // aq mgoni api unda daamatot login is arvici :d
+      this.authService.loginEmployee(this.loginForm?.value).subscribe({
+        next: (response) => console.log('Login successful', response),
+        error: (error) => console.error('Login failed', error),
+      });
     }
   }
 }

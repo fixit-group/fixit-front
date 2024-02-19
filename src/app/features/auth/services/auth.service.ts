@@ -13,4 +13,7 @@ export class AuthService {
   registerEmployee(employeeData: any) {
     return this.http.post(this.apiUrl, employeeData);
   }
+  loginEmployee(employeeData: any) {
+    return this.http.post(this.apiUrl, employeeData);
+  }
 }
